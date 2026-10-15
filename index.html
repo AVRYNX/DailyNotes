@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Catatan & Jadwal Kuliah</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        --bg1: #fff3df;
+        --bg2: #cde4ff;
+        --bg3: #ffdcc8;
+        --sf: rgba(255, 255, 255, 0.68);
+        --sf3: rgba(255, 240, 215, 0.7);
+        --sf2: #fffdf8;
+        --tx: #1f2a44;
+        --mu: #6c7a96;
+        --bd: rgba(63, 127, 224, 0.16);
+        --ac: #3f7fe0;
+        --ac2: #7b9cf7;
+        --soft: #e3eefc;
+        --r: #ef5d7a;
+        --y: #f4a62a;
+        --g: #2fbf8f;
+        --sh: 0 8px 28px rgba(80, 60, 160, 0.1);
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg1: #0f1a33;
+          --bg2: #0b2c48;
+          --bg3: #2b2140;
+          --sf: rgba(26, 42, 78, 0.72);
+          --sf3: rgba(40, 36, 70, 0.6);
+          --sf2: #1c2c52;
+          --tx: #e8eefb;
+          --mu: #98a8c8;
+          --bd: rgba(120, 170, 255, 0.2);
+          --soft: #223a66;
+          --ac: #5aa2ff;
+          --ac2: #8f9cff;
+          --sh: 0 8px 28px rgba(0, 0, 0, 0.35);
+          color-scheme: dark;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg1: #0f1a33;
+        --bg2: #0b2c48;
+        --bg3: #2b2140;
+        --sf: rgba(26, 42, 78, 0.72);
+        --sf3: rgba(40, 36, 70, 0.6);
+        --sf2: #1c2c52;
+        --tx: #e8eefb;
+        --mu: #98a8c8;
+        --bd: rgba(120, 170, 255, 0.2);
+        --soft: #223a66;
+        --ac: #5aa2ff;
+        --ac2: #8f9cff;
+        --sh: 0 8px 28px rgba(0, 0, 0, 0.35);
+        color-scheme: dark;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        height: 100%;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100%;
+        color: var(--tx);
+        font:
+          15px/1.5 "Plus Jakarta Sans",
+          system-ui,
+          sans-serif;
+        background-color: var(--bg1);
+        background-image:
+          radial-gradient(circle at 8% 0%, var(--bg3), transparent 45%),
+          radial-gradient(circle at 100% 100%, var(--bg2), transparent 55%),
+          linear-gradient(160deg, var(--bg1), var(--bg2));
+        background-attachment: fixed;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+        color: inherit;
+      }
+      button {
+        border: 1px solid var(--bd);
+        background: var(--sf2);
+        border-radius: 12px;
+        padding: 9px 14px;
+        cursor: pointer;
+        transition: 0.15s;
+      }
+      button:hover {
+        transform: translateY(-1px);
+      }
+      .pri {
+        background: linear-gradient(135deg, var(--ac), var(--ac2));
+        color: #fff;
+        border: 0;
+        font-weight: 600;
+        box-shadow: 0 6px 16px rgba(63, 127, 224, 0.3);
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        background: var(--sf2);
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 9px 12px;
+        outline: 0;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: var(--ac);
+        box-shadow: 0 0 0 3px var(--soft);
+      }
+      textarea {
+        resize: vertical;
+        min-height: 240px;
+      }
+      .app {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        min-height: 100vh;
+        max-width: 1400px;
+        margin: auto;
+      }
+      aside {
+        background: linear-gradient(180deg, var(--sf), var(--sf3));
+        border-right: 1px solid var(--bd);
+        padding: 22px 16px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .logo {
+        font-weight: 800;
+        font-size: 20px;
+        margin-bottom: 14px;
+        background: linear-gradient(135deg, var(--ac), var(--ac2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      aside button {
+        text-align: left;
+        background: none;
+        border: 0;
+        padding: 11px 14px;
+        font-weight: 600;
+        color: var(--mu);
+      }
+      aside button.on {
+        background: linear-gradient(135deg, var(--ac), var(--ac2));
+        color: #fff;
+        box-shadow: var(--sh);
+      }
+      main {
+        padding: 24px 28px 60px;
+        min-width: 0;
+      }
+      h2 {
+        font-size: 16px;
+        margin: 0 0 10px;
+      }
+      h3 {
+        margin: 0 0 4px;
+        font-size: 22px;
+      }
+      .card {
+        background: linear-gradient(145deg, var(--sf), var(--sf3));
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--bd);
+        border-radius: 20px;
+        padding: 18px;
+        margin-bottom: 16px;
+        box-shadow: var(--sh);
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+      .g2 {
+        grid-template-columns: 1.3fr 1fr;
+      }
+      .row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+      .row > * {
+        flex: 1;
+        min-width: 100px;
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 0;
+        border-bottom: 1px solid var(--bd);
+      }
+      .item:last-child {
+        border: 0;
+      }
+      .t {
+        flex: 1;
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      .mu {
+        color: var(--mu);
+        font-size: 13px;
+      }
+      .tag {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 9px;
+        border-radius: 99px;
+        background: var(--soft);
+        color: var(--ac);
+        white-space: nowrap;
+      }
+      .p1 {
+        background: #ef5d7a22;
+        color: var(--r);
+      }
+      .p2 {
+        background: #f4a62a22;
+        color: var(--y);
+      }
+      .p3 {
+        background: #2fbf8f22;
+        color: var(--g);
+      }
+      .x {
+        border: 0;
+        background: none;
+        color: var(--mu);
+        padding: 4px 8px;
+      }
+      .cal {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+      }
+      .cal .h {
+        text-align: center;
+        font-size: 12px;
+        color: var(--mu);
+        font-weight: 600;
+      }
+      .day {
+        aspect-ratio: 1;
+        min-height: 42px;
+        padding: 5px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 14px;
+      }
+      .day.td {
+        border: 2px solid var(--ac);
+      }
+      .day.sel {
+        background: linear-gradient(135deg, var(--ac), var(--ac2));
+        color: #fff;
+      }
+      .dots {
+        display: flex;
+        gap: 3px;
+      }
+      .dots i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ac);
+      }
+      .dots i.k {
+        background: var(--r);
+      }
+      .day.sel .dots i {
+        background: #fff;
+      }
+      .wk {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(7, 1fr);
+      }
+      .wd {
+        background: linear-gradient(145deg, var(--sf), var(--sf3));
+        border: 1px solid var(--bd);
+        border-radius: 18px;
+        padding: 12px;
+        min-height: 170px;
+        box-shadow: var(--sh);
+      }
+      .wd.td {
+        border: 2px solid var(--ac);
+      }
+      .wd b {
+        font-size: 13px;
+      }
+      .ev {
+        font-size: 12px;
+        border-radius: 10px;
+        padding: 5px 8px;
+        margin-top: 6px;
+        background: var(--soft);
+        overflow-wrap: anywhere;
+      }
+      .ev.k {
+        background: #ef5d7a1f;
+      }
+      .notes {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        gap: 16px;
+      }
+      .nl {
+        cursor: pointer;
+        padding: 11px;
+        border-radius: 14px;
+        border: 1px solid var(--bd);
+        margin-bottom: 8px;
+        background: var(--sf2);
+      }
+      .nl.sel {
+        border-color: var(--ac);
+        background: var(--soft);
+      }
+      .hero {
+        border-radius: 24px;
+        padding: 22px 24px;
+        margin-bottom: 16px;
+        color: #fff;
+        background: linear-gradient(120deg, #4a8fe7, #8f9bf7 55%, #f7b08f);
+        box-shadow: var(--sh);
+      }
+      .hero h3 {
+        margin: 0;
+        font-size: 26px;
+      }
+      .hero p {
+        margin: 4px 0 0;
+        opacity: 0.95;
+      }
+      .timer {
+        font-size: 52px;
+        font-weight: 800;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+      .done .t {
+        text-decoration: line-through;
+        opacity: 0.45;
+      }
+      .late {
+        color: var(--r);
+      }
+      #al {
+        position: fixed;
+        inset: 0;
+        background: rgba(20, 10, 50, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+        padding: 20px;
+      }
+      #al.on {
+        display: flex;
+      }
+      #al .card {
+        max-width: 420px;
+        width: 100%;
+        text-align: center;
+        background: var(--sf2);
+        animation: sh 0.5s infinite;
+      }
+      @keyframes sh {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+        25% {
+          transform: rotate(-1.5deg);
+        }
+        75% {
+          transform: rotate(1.5deg);
+        }
+      }
+      @media (max-width: 900px) {
+        .wk {
+          grid-template-columns: 1fr;
+        }
+        .wd {
+          min-height: 0;
+        }
+        .g2 {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 760px) {
+        .app {
+          display: block;
+        }
+        main {
+          padding: 14px 14px 100px;
+        }
+        aside {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          top: auto;
+          height: auto;
+          flex-direction: row;
+          padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
+          z-index: 20;
+          background: var(--sf2);
+          border-top: 1px solid var(--bd);
+          border-right: 0;
+          gap: 0;
+        }
+        .logo {
+          display: none;
+        }
+        aside button {
+          flex: 1;
+          text-align: center;
+          padding: 6px 2px;
+          font-size: 10px;
+          border-radius: 12px;
+        }
+        aside button span {
+          display: block;
+          font-size: 19px;
+        }
+        .notes {
+          grid-template-columns: 1fr;
+        }
+        .timer {
+          font-size: 42px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside id="nav"></aside>
+      <main id="m"></main>
+    </div>
+    <div id="al">
+      <div class="card">
+        <div style="font-size: 48px">⏰</div>
+        <h2>Pengingat H-1!</h2>
+        <div id="alb" style="text-align: left"></div>
+        <button class="pri" id="alx" style="margin-top: 12px; width: 100%">
+          Siap, saya ingat!
+        </button>
+      </div>
+    </div>
+    <script>
+      const $ = (s) => document.querySelector(s);
+      const esc = (s) =>
+        String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      let S = {
+        notes: [],
+        events: [],
+        tasks: [],
+        set: { on: true, rt: "07:00" },
+        seen: {},
+      };
+      try {
+        const r =
+          localStorage.getItem("planner-v2") ||
+          localStorage.getItem("planner-v1");
+        if (r) S = Object.assign(S, JSON.parse(r));
+      } catch (e) {}
+      S.set = S.set || { on: true, rt: "07:00" };
+      S.seen = S.seen || {};
+      const save = () => {
+        try {
+          localStorage.setItem("planner-v2", JSON.stringify(S));
+        } catch (e) {}
+      };
+      const id = () =>
+        Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      const iso = (d) =>
+        d.getFullYear() +
+        "-" +
+        String(d.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(d.getDate()).padStart(2, "0");
+      const add = (d, n) => {
+        const x = new Date(d);
+        x.setDate(x.getDate() + n);
+        return x;
+      };
+      const today = iso(new Date());
+      const BLN = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+      ];
+      const HR = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
+      const dow = (d) => (d.getDay() + 6) % 7;
+      const fmt = (s) => {
+        const d = new Date(s + "T00:00");
+        return (
+          HR[dow(d)] + ", " + d.getDate() + " " + BLN[d.getMonth()].slice(0, 3)
+        );
+      };
+      let tab = "home",
+        cur = new Date(),
+        wkOff = 0,
+        selDay = today,
+        selNote = null,
+        q = "";
+      const evOn = (ds) =>
+        S.events
+          .filter(
+            (e) =>
+              e.date === ds ||
+              (e.weekly &&
+                e.date <= ds &&
+                dow(new Date(e.date + "T00:00")) ===
+                  dow(new Date(ds + "T00:00"))),
+          )
+          .sort((a, b) => (a.time || "").localeCompare(b.time || ""));
+      const PN = { 1: "Tinggi", 2: "Sedang", 3: "Rendah" };
+      const evHtml = (e, del) =>
+        `<div class="item"><span class="mu">${esc(e.time || "--:--")}</span><span class="t">${esc(e.title)} ${e.weekly ? '<span class="mu">↻</span>' : ""}</span><span class="tag">${esc(e.type)}</span>${del ? `<button class="x" data-ed="${e.id}">✕</button>` : ""}</div>`;
+      const tkHtml = (t) =>
+        `<div class="item ${t.done ? "done" : ""}"><input type="checkbox" style="width:auto" data-tg="${t.id}" ${t.done ? "checked" : ""}><span class="t">${esc(t.title)}<br><span class="mu">${esc(t.course || "")} ${t.due ? "· " + fmt(t.due) : ""}</span></span><span class="tag p${t.p || 2}">${PN[t.p || 2]}</span><button class="x" data-td="${t.id}">✕</button></div>`;
+      const open = () =>
+        S.tasks
+          .filter((t) => !t.done)
+          .sort(
+            (a, b) =>
+              (a.p || 2) - (b.p || 2) ||
+              (a.due || "9").localeCompare(b.due || "9"),
+          );
+
+      function home() {
+        const ev = evOn(today),
+          up = [];
+        for (let i = 1; i <= 7; i++) {
+          const ds = iso(add(new Date(), i));
+          evOn(ds).forEach((e) => up.push([ds, e]));
+        }
+        const n =
+          ev.length + S.tasks.filter((t) => !t.done && t.due === today).length;
+        return `<div class="hero"><h3>Halo! 👋</h3><p>${fmt(today)} · ${n} agenda hari ini</p></div>
+ <div class="grid g2"><div class="card"><h2>Jadwal hari ini</h2>${ev.map((e) => evHtml(e)).join("") || '<p class="mu">Tidak ada jadwal 🎉</p>'}</div>
+ <div class="card"><h2>Tugas prioritas</h2>${open().slice(0, 5).map(tkHtml).join("") || '<p class="mu">Semua beres!</p>'}</div></div>
+ <div class="card"><h2>7 hari ke depan</h2>${
+   up
+     .slice(0, 8)
+     .map(
+       ([d, e]) =>
+         `<div class="item"><span class="mu">${fmt(d)}</span><span class="t">${esc(e.title)}</span><span class="tag">${esc(e.type)}</span></div>`,
+     )
+     .join("") || '<p class="mu">Belum ada jadwal.</p>'
+ }</div>`;
+      }
+      function notes() {
+        const l = S.notes.filter((n) =>
+            (n.title + n.body + n.course)
+              .toLowerCase()
+              .includes(q.toLowerCase()),
+          ),
+          n = S.notes.find((x) => x.id === selNote);
+        return `<div class="notes"><div><div class="row"><input id="sq" placeholder="Cari catatan..." value="${esc(q)}"><button class="pri" id="nn">+ Baru</button></div>
+ ${l.map((x) => `<div class="nl ${x.id === selNote ? "sel" : ""}" data-n="${x.id}"><b>${esc(x.title || "Tanpa judul")}</b><br><span class="mu">${esc(x.course || "Umum")}</span></div>`).join("") || '<p class="mu">Belum ada catatan.</p>'}</div>
+ <div class="card">${n ? `<div class="row"><input id="nt" placeholder="Judul" value="${esc(n.title)}"><input id="nc" placeholder="Mata kuliah / label" value="${esc(n.course)}"></div><textarea id="nb" placeholder="Tulis catatanmu di sini...">${esc(n.body)}</textarea><div class="row" style="margin-top:8px"><button id="nd">🗑 Hapus</button></div>` : '<p class="mu">Pilih atau buat catatan baru.</p>'}</div></div>`;
+      }
+      function addForm() {
+        return `<div class="card"><h2>Tambah jadwal · ${fmt(selDay)}</h2><div class="row"><input id="et" placeholder="Nama kegiatan / mata kuliah"></div>
+ <div class="row"><input type="time" id="etm"><select id="ety"><option>Kuliah</option><option>Ujian</option><option>Organisasi</option><option>Pribadi</option></select></div>
+ <label class="mu"><input type="checkbox" id="ew" style="width:auto"> Ulangi tiap minggu (jadwal kuliah)</label>
+ <div class="row" style="margin-top:8px"><button class="pri" id="ea">Simpan jadwal</button></div></div>`;
+      }
+      function calendar() {
+        const y = cur.getFullYear(),
+          m = cur.getMonth(),
+          first = dow(new Date(y, m, 1)),
+          dim = new Date(y, m + 1, 0).getDate();
+        let c = HR.map((h) => `<div class="h">${h}</div>`).join("");
+        for (let i = 0; i < first + dim; i++) {
+          if (i < first) {
+            c += "<div></div>";
+            continue;
+          }
+          const ds = iso(new Date(y, m, i - first + 1)),
+            ev = evOn(ds).length,
+            tk = S.tasks.some((t) => !t.done && t.due === ds);
+          c += `<button class="day ${ds === today ? "td" : ""} ${ds === selDay ? "sel" : ""}" data-d="${ds}"><span>${i - first + 1}</span><span class="dots">${ev ? "<i></i>" : ""}${tk ? '<i class="k"></i>' : ""}</span></button>`;
+        }
+        return `<div class="grid g2"><div class="card"><div class="row" style="align-items:center"><button id="pv">‹</button><b style="text-align:center">${BLN[m]} ${y}</b><button id="nx">›</button></div><div class="cal">${c}</div><p class="mu">● jadwal · <span class="late">●</span> deadline tugas</p></div>
+ <div><div class="card"><h2>${fmt(selDay)}</h2>${
+   evOn(selDay)
+     .map((e) => evHtml(e, 1))
+     .join("") || '<p class="mu">Kosong.</p>'
+ }${S.tasks
+   .filter((t) => !t.done && t.due === selDay)
+   .map(
+     (t) =>
+       `<div class="item"><span class="t late">⚑ Deadline: ${esc(t.title)}</span></div>`,
+   )
+   .join("")}</div>${addForm()}</div></div>`;
+      }
+      function week() {
+        const mon = add(new Date(), wkOff * 7 - dow(new Date()));
+        let c = "";
+        for (let i = 0; i < 7; i++) {
+          const d = add(mon, i),
+            ds = iso(d);
+          c += `<div class="wd ${ds === today ? "td" : ""}"><b>${HR[i]} ${d.getDate()}</b>${evOn(
+            ds,
+          )
+            .map(
+              (e) =>
+                `<div class="ev">${esc(e.time || "")} ${esc(e.title)}</div>`,
+            )
+            .join("")}${S.tasks
+            .filter((t) => !t.done && t.due === ds)
+            .map((t) => `<div class="ev k">⚑ ${esc(t.title)}</div>`)
+            .join("")}</div>`;
+        }
+        return `<div class="row" style="align-items:center"><button id="wp">‹ Minggu lalu</button><b style="text-align:center">${fmt(iso(mon))} – ${fmt(iso(add(mon, 6)))}</b><button id="wn">Minggu depan ›</button></div><div class="wk">${c}</div>`;
+      }
+      let tm = { left: 1500, run: null, mode: "Fokus" };
+      const tmS = () =>
+        String(Math.floor(tm.left / 60)).padStart(2, "0") +
+        ":" +
+        String(tm.left % 60).padStart(2, "0");
+      function tasks() {
+        const l = [...S.tasks].sort(
+          (a, b) =>
+            a.done - b.done ||
+            (a.p || 2) - (b.p || 2) ||
+            (a.due || "9").localeCompare(b.due || "9"),
+        );
+        return `<div class="grid"><div class="card"><h2>Daftar tugas</h2><div class="row"><input id="tt" placeholder="Tugas baru"></div><div class="row"><input id="tc" placeholder="Mata kuliah"><input type="date" id="tdt" value="${today}"></div>
+ <div class="row"><select id="tp"><option value="1">🔴 Prioritas tinggi</option><option value="2" selected>🟠 Sedang</option><option value="3">🟢 Rendah</option></select><button class="pri" id="ta">Tambah</button></div>${l.map(tkHtml).join("")}</div>
+ <div class="card"><h2>Timer Pomodoro · ${tm.mode}</h2><div class="timer" id="tmv">${tmS()}</div><div class="row" style="margin-top:10px"><button class="pri" id="ts">${tm.run ? "Jeda" : "Mulai"}</button><button id="t25">Fokus 25</button><button id="t5">Istirahat 5</button></div></div></div>`;
+      }
+      function settings() {
+        const perm =
+          typeof Notification === "undefined"
+            ? "tidak didukung"
+            : Notification.permission;
+        return `<div class="grid"><div class="card"><h2>🔔 Pengingat H-1</h2><p class="mu">Alarm, getar, dan notifikasi muncul 1 hari sebelum jadwal atau deadline tugas (dan pada hari-H) saat aplikasi terbuka.</p>
+ <label><input type="checkbox" id="son" style="width:auto" ${S.set.on ? "checked" : ""}> Aktifkan pengingat</label>
+ <div class="row" style="margin-top:8px"><label class="mu" style="flex:1">Jam pengingat<input type="time" id="srt" value="${S.set.rt}"></label></div>
+ <div class="row"><button id="sperm">Izinkan notifikasi (${perm})</button><button id="stest" class="pri">Tes alarm</button></div>
+ <p class="mu">Catatan: browser tidak bisa membunyikan alarm saat tab/aplikasi tertutup. Biarkan tab terbuka, atau pasang ke layar utama HP. Getar hanya jalan di Android.</p></div>
+ <div class="card"><h2>📦 Ekspor / Impor data</h2><p class="mu">Salin kode data ini, kirim ke dirimu sendiri (WhatsApp/email), lalu tempel di perangkat lain.</p>
+ <div class="row"><button id="sexp" class="pri">Salin data</button></div><textarea id="sbox" style="min-height:110px" placeholder="Kode data muncul di sini / tempel kode untuk impor"></textarea>
+ <div class="row" style="margin-top:8px"><button id="simp">Impor dari kotak di atas</button><input type="file" id="sfile" accept=".json,.txt"></div></div></div>`;
+      }
+      const NAV = [
+        ["home", "🏠", "Beranda"],
+        ["notes", "📝", "Catatan"],
+        ["cal", "📅", "Kalender"],
+        ["week", "🗓", "Mingguan"],
+        ["tasks", "✅", "Tugas"],
+        ["set", "⚙️", "Atur"],
+      ];
+      function render() {
+        $("#nav").innerHTML =
+          '<div class="logo">📒 Catatanku</div>' +
+          NAV.map(
+            ([k, i, v]) =>
+              `<button class="${tab === k ? "on" : ""}" data-t="${k}"><span>${i}</span>${v}</button>`,
+          ).join("") +
+          '<button id="th" style="margin-top:auto"><span>🌓</span>Tema</button>';
+        $("#m").innerHTML = {
+          home,
+          notes,
+          cal: calendar,
+          week,
+          tasks,
+          set: settings,
+        }[tab]();
+        bind();
+      }
+      function bind() {
+        const A = (s, k, f) =>
+          document.querySelectorAll(s).forEach((b) => (b[k] = () => f(b)));
+        A("[data-t]", "onclick", (b) => {
+          tab = b.dataset.t;
+          render();
+        });
+        A("[data-n]", "onclick", (b) => {
+          selNote = b.dataset.n;
+          render();
+        });
+        A("[data-d]", "onclick", (b) => {
+          selDay = b.dataset.d;
+          render();
+        });
+        A("[data-tg]", "onchange", (b) => {
+          S.tasks.find((x) => x.id === b.dataset.tg).done = b.checked;
+          save();
+          render();
+        });
+        A("[data-td]", "onclick", (b) => {
+          S.tasks = S.tasks.filter((x) => x.id !== b.dataset.td);
+          save();
+          render();
+        });
+        A("[data-ed]", "onclick", (b) => {
+          S.events = S.events.filter((x) => x.id !== b.dataset.ed);
+          save();
+          render();
+        });
+        const o = (s, f) => {
+          const e = $(s);
+          if (e) e.onclick = f;
+        };
+        o("#th", () => {
+          const r = document.documentElement,
+            d = matchMedia("(prefers-color-scheme:dark)").matches,
+            c = r.dataset.theme || (d ? "dark" : "light");
+          r.dataset.theme = c === "dark" ? "light" : "dark";
+        });
+        o("#nn", () => {
+          const n = { id: id(), title: "", course: "", body: "" };
+          S.notes.unshift(n);
+          selNote = n.id;
+          save();
+          render();
+        });
+        o("#nd", () => {
+          S.notes = S.notes.filter((x) => x.id !== selNote);
+          selNote = null;
+          save();
+          render();
+        });
+        const sq = $("#sq");
+        if (sq)
+          sq.oninput = () => {
+            q = sq.value;
+            const p = sq.selectionStart;
+            render();
+            const e = $("#sq");
+            e.focus();
+            e.setSelectionRange(p, p);
+          };
+        const n = S.notes.find((x) => x.id === selNote);
+        [
+          ["#nt", "title"],
+          ["#nc", "course"],
+          ["#nb", "body"],
+        ].forEach(([s, k]) => {
+          const e = $(s);
+          if (e)
+            e.oninput = () => {
+              n[k] = e.value;
+              save();
+            };
+        });
+        o("#pv", () => {
+          cur = new Date(cur.getFullYear(), cur.getMonth() - 1, 1);
+          render();
+        });
+        o("#nx", () => {
+          cur = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+          render();
+        });
+        o("#wp", () => {
+          wkOff--;
+          render();
+        });
+        o("#wn", () => {
+          wkOff++;
+          render();
+        });
+        o("#ea", () => {
+          const t = $("#et").value.trim();
+          if (!t) return;
+          S.events.push({
+            id: id(),
+            title: t,
+            date: selDay,
+            time: $("#etm").value,
+            type: $("#ety").value,
+            weekly: $("#ew").checked,
+          });
+          save();
+          render();
+        });
+        o("#ta", () => {
+          const t = $("#tt").value.trim();
+          if (!t) return;
+          S.tasks.push({
+            id: id(),
+            title: t,
+            course: $("#tc").value,
+            due: $("#tdt").value,
+            p: +$("#tp").value,
+            done: false,
+          });
+          save();
+          render();
+        });
+        o("#ts", () => {
+          if (tm.run) {
+            clearInterval(tm.run);
+            tm.run = null;
+          } else
+            tm.run = setInterval(() => {
+              tm.left--;
+              if (tm.left <= 0) {
+                clearInterval(tm.run);
+                tm.run = null;
+                tm.left = 0;
+                ring(
+                  [
+                    tm.mode === "Fokus"
+                      ? "Fokus selesai, saatnya istirahat!"
+                      : "Istirahat selesai, ayo lanjut!",
+                  ],
+                  "Timer selesai",
+                );
+              }
+              const v = $("#tmv");
+              if (v) v.textContent = tmS();
+            }, 1000);
+          render();
+        });
+        const st = (s, l, mo) =>
+          o(s, () => {
+            clearInterval(tm.run);
+            tm = { left: l, run: null, mode: mo };
+            render();
+          });
+        st("#t25", 1500, "Fokus");
+        st("#t5", 300, "Istirahat");
+        const on = $("#son");
+        if (on)
+          on.onchange = () => {
+            S.set.on = on.checked;
+            save();
+          };
+        const rt = $("#srt");
+        if (rt)
+          rt.onchange = () => {
+            S.set.rt = rt.value || "07:00";
+            save();
+          };
+        o("#sperm", () => {
+          if (typeof Notification !== "undefined")
+            Notification.requestPermission().then(render);
+        });
+        o("#stest", () =>
+          ring(["Contoh: Tugas Kalkulus — besok!"], "Tes alarm"),
+        );
+        o("#sexp", () => {
+          const b = $("#sbox");
+          b.value = JSON.stringify({
+            notes: S.notes,
+            events: S.events,
+            tasks: S.tasks,
+            set: S.set,
+          });
+          b.select();
+          try {
+            navigator.clipboard.writeText(b.value).then(
+              () => alert("Data disalin!"),
+              () => document.execCommand("copy"),
+            );
+          } catch (e) {
+            document.execCommand("copy");
+          }
+        });
+        const imp = (t) => {
+          try {
+            const d = JSON.parse(t);
+            if (
+              !Array.isArray(d.notes) ||
+              !Array.isArray(d.events) ||
+              !Array.isArray(d.tasks)
+            )
+              throw 0;
+            if (
+              confirm("Ganti semua data di perangkat ini dengan data impor?")
+            ) {
+              S.notes = d.notes;
+              S.events = d.events;
+              S.tasks = d.tasks;
+              S.set = d.set || S.set;
+              save();
+              render();
+              alert("Impor berhasil!");
+            }
+          } catch (e) {
+            alert("Kode data tidak valid.");
+          }
+        };
+        o("#simp", () => imp($("#sbox").value));
+        const sf = $("#sfile");
+        if (sf)
+          sf.onchange = () => {
+            const f = sf.files[0];
+            if (f) {
+              const r = new FileReader();
+              r.onload = () => imp(r.result);
+              r.readAsText(f);
+            }
+          };
+      }
+      function ring(list, title) {
+        $("#alb").innerHTML = list
+          .map(
+            (x) => `<div class="item"><span class="t">${esc(x)}</span></div>`,
+          )
+          .join("");
+        $("#al").classList.add("on");
+        try {
+          navigator.vibrate && navigator.vibrate([500, 200, 500, 200, 800]);
+        } catch (e) {}
+        try {
+          const c = new (window.AudioContext || window.webkitAudioContext)();
+          [0, 0.35, 0.7, 1.05].forEach((t) => {
+            const o = c.createOscillator(),
+              g = c.createGain();
+            o.type = "square";
+            o.frequency.value = 880;
+            g.gain.value = 0.12;
+            o.connect(g);
+            g.connect(c.destination);
+            o.start(c.currentTime + t);
+            o.stop(c.currentTime + t + 0.2);
+          });
+        } catch (e) {}
+        try {
+          if (
+            typeof Notification !== "undefined" &&
+            Notification.permission === "granted"
+          )
+            new Notification(title || "Pengingat", { body: list.join("\n") });
+        } catch (e) {}
+      }
+      $("#alx").onclick = () => $("#al").classList.remove("on");
+      function check() {
+        if (!S.set.on) return;
+        const now = new Date();
+        if (
+          now.getHours() * 60 + now.getMinutes() <
+          +S.set.rt.slice(0, 2) * 60 + +S.set.rt.slice(3)
+        )
+          return;
+        const out = [];
+        [1, 0].forEach((off) => {
+          const ds = iso(add(now, off)),
+            w = off ? "BESOK" : "HARI INI";
+          evOn(ds).forEach((e) => {
+            const k = "e" + e.id + ds;
+            if (!S.seen[k]) {
+              S.seen[k] = 1;
+              out.push(`${w}: ${e.title} ${e.time || ""}`);
+            }
+          });
+          S.tasks
+            .filter((t) => !t.done && t.due === ds)
+            .forEach((t) => {
+              const k = "t" + t.id + ds;
+              if (!S.seen[k]) {
+                S.seen[k] = 1;
+                out.push(`${w}: Tugas "${t.title}" (${PN[t.p || 2]})`);
+              }
+            });
+        });
+        if (out.length) {
+          save();
+          ring(out, "Pengingat jadwal");
+        }
+      }
+      render();
+      check();
+      setInterval(check, 30000);
+    </script>
+  </body>
+</html>
